@@ -1,3 +1,30 @@
-# Name = Gaurav Khandelwal
-# Email = khandelwalgaurav566@gmail.com
-# Squad72
+Project Title:
+"Google Trends Guess"
+
+Project Overview:
+Google Trends Guess is a simple and interactive web application where users are presented with a set of 2-4 words and must guess which one is searched more frequently on Google. The goal is to make the game fun, educational, and engaging, allowing users to learn about search trends while challenging their knowledge of what's popular. This project will be lightweight with essential features for an interactive user experience.
+
+Key Features:
+Word Guessing: Display a set of 2 words, and users must guess which one has the highest Google search volume.
+Result Reveal: After the guess, the correct answer is revealed along with search volume data.
+Score Tracker: Displays the user's score based on correct guesses.
+Minimalist Design: Simple, easy-to-use interface with no unnecessary distractions.
+Timer: Optional countdown timer for added challenge.
+
+Tech Stack:
+Frontend:
+React.js: For dynamic, responsive UI.
+Tailwind CSS: For clean, minimalist styling.
+Backend:
+Node.js: Server-side JavaScript to handle API requests.
+Express.js: For creating and managing routes.
+API Integration:
+Google Trends API (or mock data for simplicity) to fetch the search volume information.
+Deployment:
+Vercel or Netlify for easy and fast deployment.
+Why This Project?
+Simplicity: This project focuses on a minimal feature set but still offers an engaging and interactive experience for users. It is perfect for demonstrating basic web development skills while keeping things light.
+Educational: Users learn about Google search trends, gaining insight into popular topics and improving their general knowledge of global trends.
+Practical Learning: You’ll work with core technologies like React.js for building interactive UIs, Node.js and Express.js for handling backend logic, and learn to integrate with APIs for fetching live data.
+Scalable: Though simple, this project has room for future enhancements, such as multiplayer support or personalized user dashboards.
+Quick Execution: The project has a low barrier to entry in terms of complexity, allowing for quick implementation while still offering a fun and functional user experience.
