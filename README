@@ -2,7 +2,7 @@ Project Title:
 "Google Trends Guess"
 
 Project Overview:
-Google Trends Guess is a simple and interactive web application where users are presented with a set of 2-4 words and must guess which one is searched more frequently on Google. The goal is to make the game fun, educational, and engaging, allowing users to learn about search trends while challenging their knowledge of what's popular. This project will be lightweight with essential features for an interactive user experience.
+Google Trends Guess is a simple and interactive web application where users are presented with a set of 2 words and must guess which one is searched more frequently on Google. The goal is to make the game fun, educational, and engaging, allowing users to learn about search trends while challenging their knowledge of what's popular. This project will be lightweight with essential features for an interactive user experience.
 
 Key Features:
 Word Guessing: Display a set of 2 words, and users must guess which one has the highest Google search volume.
