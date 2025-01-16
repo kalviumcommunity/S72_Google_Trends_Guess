@@ -1,0 +1,20 @@
+{
+  "name": "s72_google_trends_guess",
+  "version": "1.0.0",
+  "description": "Project Title:\r \"Google Trends Guess\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalviumcommunity/S72_Google_Trends_Guess.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalviumcommunity/S72_Google_Trends_Guess/issues"
+  },
+  "homepage": "https://github.com/kalviumcommunity/S72_Google_Trends_Guess#readme"
+}
