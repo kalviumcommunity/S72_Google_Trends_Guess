@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/kalviumcommunity/S72_Google_Trends_Guess/issues"
   },
-  "homepage": "https://github.com/kalviumcommunity/S72_Google_Trends_Guess#readme"
+  "homepage": "https://github.com/kalviumcommunity/S72_Google_Trends_Guess#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "i": "^0.3.7"
+  }
 }
