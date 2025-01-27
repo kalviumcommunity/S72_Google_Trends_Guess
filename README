@@ -28,3 +28,5 @@ Educational: Users learn about Google search trends, gaining insight into popula
 Practical Learning: You’ll work with core technologies like React.js for building interactive UIs, Node.js and Express.js for handling backend logic, and learn to integrate with APIs for fetching live data.
 Scalable: Though simple, this project has room for future enhancements, such as multiplayer support or personalized user dashboards.
 Quick Execution: The project has a low barrier to entry in terms of complexity, allowing for quick implementation while still offering a fun and functional user experience.
+
+Render deployment link : https://google-trends-guess.onrender.com
