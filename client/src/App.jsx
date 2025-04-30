@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
+import NotFound from './pages/NotFound';
+import ComingSoon from './pages/ComingSoon';
 
 function App() {
   return (
@@ -10,13 +12,10 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Landing />} />
-            {/* Add more routes as they are implemented */}
-            <Route path="*" element={
-              <div className="container py-24 text-center">
-                <h1 className="text-4xl font-bold text-gray-900">404 - Page Not Found</h1>
-                <p className="mt-4 text-gray-600">The page you're looking for doesn't exist.</p>
-              </div>
-            } />
+            <Route path="/play" element={<ComingSoon />} />
+            <Route path="/leaderboard" element={<ComingSoon />} />
+            <Route path="/about" element={<ComingSoon />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>
