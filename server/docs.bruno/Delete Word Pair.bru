@@ -1,0 +1,15 @@
+meta {
+  name: Delete Word Pair
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:5000/api/words/:id
+  body: none
+}
+
+docs {
+  title: "Delete Word Pair"
+  description: "Soft deletes a word pair by setting isActive to false"
+} 

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const wordRoutes = require('./routes/wordRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -35,6 +36,9 @@ const initializeDB = async () => {
     }
 };
 
+// Routes
+app.use('/api', wordRoutes);
+
 // Health check route
 app.get('/health', (req, res) => {
     res.json({
@@ -49,7 +53,8 @@ app.get('/', (req, res) => {
     res.json({
         message: 'Welcome to Google Trends Guess API',
         databaseStatus: isConnected ? 'Connected' : 'Disconnected',
-        healthCheck: '/health'
+        healthCheck: '/health',
+        apiDocs: '/api/docs'
     });
 });
 
