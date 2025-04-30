@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const wordRoutes = require('./routes/wordRoutes');
+const { handleError } = require('./utils/errorHandler');
 
 // Load environment variables
 dotenv.config();
@@ -19,6 +20,12 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Add request logging middleware for debugging
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+    next();
+});
 
 // Database connection state
 let isConnected = false;
@@ -44,7 +51,9 @@ app.get('/health', (req, res) => {
     res.json({
         status: 'ok',
         timestamp: new Date().toISOString(),
-        databaseStatus: isConnected ? 'connected' : 'disconnected'
+        databaseStatus: isConnected ? 'connected' : 'disconnected',
+        nodeVersion: process.version,
+        memoryUsage: process.memoryUsage()
     });
 });
 
@@ -58,13 +67,23 @@ app.get('/', (req, res) => {
     });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
-        error: 'Internal Server Error',
-        message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
+// Handle 404 routes
+app.use((req, res, next) => {
+    res.status(404).json({
+        status: 'error',
+        message: `Cannot ${req.method} ${req.path}`
     });
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Error:', {
+        message: err.message,
+        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
+        path: req.path,
+        method: req.method
+    });
+    handleError(err, res);
 });
 
 // Initialize database and start server
@@ -75,11 +94,24 @@ const startServer = async () => {
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
             console.log(`Database status: ${isConnected ? 'Connected' : 'Not Connected'}`);
+            console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);
         process.exit(1);
     }
 };
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+    process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (error) => {
+    console.error('Unhandled Rejection:', error);
+    process.exit(1);
+});
 
 startServer(); 

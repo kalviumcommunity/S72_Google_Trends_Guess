@@ -1,94 +1,106 @@
 const express = require('express');
 const router = express.Router();
 const Word = require('../models/Word');
+const { AppError, handleError } = require('../utils/errorHandler');
+const { validateWordPair, validateMongoId } = require('../middleware/validation');
+
+// Wrap async route handlers
+const asyncHandler = fn => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
 
 // GET all word pairs
-router.get('/words', async (req, res) => {
-    try {
-        const words = await Word.find({ isActive: true });
-        res.json(words);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+router.get('/words', asyncHandler(async (req, res) => {
+    const words = await Word.find({ isActive: true });
+    res.json({
+        status: 'success',
+        results: words.length,
+        data: words
+    });
+}));
 
 // GET random word pair for game
-router.get('/words/random', async (req, res) => {
-    try {
-        const count = await Word.countDocuments({ isActive: true });
-        const random = Math.floor(Math.random() * count);
-        const word = await Word.findOne({ isActive: true }).skip(random);
-        res.json(word);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+router.get('/words/random', asyncHandler(async (req, res) => {
+    // Use aggregation with $sample for better performance
+    const [word] = await Word.aggregate([
+        { $match: { isActive: true } },
+        { $sample: { size: 1 } }
+    ]);
+
+    if (!word) {
+        throw new AppError('No word pairs available', 404);
     }
-});
+
+    res.json({
+        status: 'success',
+        data: word
+    });
+}));
 
 // GET specific word pair
-router.get('/words/:id', async (req, res) => {
-    try {
-        const word = await Word.findById(req.params.id);
-        if (word && word.isActive) {
-            res.json(word);
-        } else {
-            res.status(404).json({ message: 'Word pair not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+router.get('/words/:id', validateMongoId, asyncHandler(async (req, res) => {
+    const word = await Word.findOne({ _id: req.params.id, isActive: true });
+    
+    if (!word) {
+        throw new AppError('Word pair not found', 404);
     }
-});
+
+    res.json({
+        status: 'success',
+        data: word
+    });
+}));
 
 // POST new word pair
-router.post('/words', async (req, res) => {
-    const word = new Word({
-        word1: req.body.word1,
-        word2: req.body.word2,
-        searchVolume1: req.body.searchVolume1,
-        searchVolume2: req.body.searchVolume2
-    });
+router.post('/words', validateWordPair, asyncHandler(async (req, res) => {
+    const word = new Word(req.body);
+    const newWord = await word.save();
 
-    try {
-        const newWord = await word.save();
-        res.status(201).json(newWord);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+    res.status(201).json({
+        status: 'success',
+        data: newWord
+    });
+}));
 
 // PUT/UPDATE word pair
-router.put('/words/:id', async (req, res) => {
-    try {
-        const word = await Word.findById(req.params.id);
-        if (!word || !word.isActive) {
-            return res.status(404).json({ message: 'Word pair not found' });
-        }
+router.put('/words/:id', validateMongoId, validateWordPair, asyncHandler(async (req, res) => {
+    const word = await Word.findOneAndUpdate(
+        { _id: req.params.id, isActive: true },
+        req.body,
+        { new: true, runValidators: true }
+    );
 
-        if (req.body.word1) word.word1 = req.body.word1;
-        if (req.body.word2) word.word2 = req.body.word2;
-        if (req.body.searchVolume1) word.searchVolume1 = req.body.searchVolume1;
-        if (req.body.searchVolume2) word.searchVolume2 = req.body.searchVolume2;
-
-        const updatedWord = await word.save();
-        res.json(updatedWord);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    if (!word) {
+        throw new AppError('Word pair not found', 404);
     }
-});
+
+    res.json({
+        status: 'success',
+        data: word
+    });
+}));
 
 // DELETE word pair (soft delete)
-router.delete('/words/:id', async (req, res) => {
-    try {
-        const word = await Word.findById(req.params.id);
-        if (!word || !word.isActive) {
-            return res.status(404).json({ message: 'Word pair not found' });
-        }
+router.delete('/words/:id', validateMongoId, asyncHandler(async (req, res) => {
+    const word = await Word.findOneAndUpdate(
+        { _id: req.params.id, isActive: true },
+        { isActive: false },
+        { new: true }
+    );
 
-        word.isActive = false;
-        await word.save();
-        res.json({ message: 'Word pair deleted' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    if (!word) {
+        throw new AppError('Word pair not found', 404);
     }
+
+    res.json({
+        status: 'success',
+        message: 'Word pair deleted'
+    });
+}));
+
+// Error handling middleware
+router.use((err, req, res, next) => {
+    handleError(err, res);
 });
 
 module.exports = router; 
