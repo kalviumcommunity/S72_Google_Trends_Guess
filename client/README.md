@@ -1,12 +1,52 @@
-# React + Vite
+# Google Trends Guess
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fun and interactive game where players guess which search term is more popular on Google Trends.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Visit the live application at: [https://trends-guess.pages.dev](https://trends-guess.pages.dev)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Compare search term popularity
+- Real-time scoring system
+- Responsive design
+- Accessibility support
+- Beautiful UI with Tailwind CSS
+
+## Development
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+3. Start the development server:
+```bash
+npm run dev
+```
+
+## Deployment
+
+This project is deployed on Cloudflare Pages. To deploy your own instance:
+
+1. Fork this repository
+2. Create a Cloudflare Pages project
+3. Connect your repository
+4. Configure the build settings:
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+   - Environment variables: None required
+
+## Tech Stack
+
+- React
+- Tailwind CSS
+- Vite
+- React Router
+- Headless UI
+- Hero Icons
+
+## License
+
+MIT
