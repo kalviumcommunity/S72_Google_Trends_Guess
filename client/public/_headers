@@ -1,7 +1,0 @@
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer-when-downgrade
-  X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: default-src 'self'; connect-src 'self' https://*.trends-guess.pages.dev; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
-*/ 
