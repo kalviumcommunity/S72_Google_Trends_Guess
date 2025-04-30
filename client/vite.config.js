@@ -5,19 +5,23 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    rollupOptions: {
-      external: [],
-      output: {
-        manualChunks: undefined
-      }
-    },
-    commonjsOptions: {
-      include: [/node_modules/],
-      extensions: ['.js', '.cjs']
-    },
-    target: 'es2015'
+    minify: 'esbuild',
+    target: 'es2015',
+    sourcemap: true,
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    cssCodeSplit: true,
+    modulePreload: true,
+    cssMinify: true
   },
   optimizeDeps: {
-    include: ['react', 'react-dom']
+    include: ['react', 'react-dom'],
+    esbuildOptions: {
+      target: 'es2015'
+    }
+  },
+  esbuild: {
+    jsxInject: `import React from 'react'`
   }
 })

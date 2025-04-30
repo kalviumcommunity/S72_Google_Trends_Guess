@@ -3,18 +3,10 @@ name = "trends-guess"
 
 # Build Configuration
 [build]
-command = """
-cd client && \
-export ROLLUP_SKIP_NODE_RESOLUTION=true && \
-rm -rf node_modules package-lock.json && \
-npm cache clean --force && \
-npm install --legacy-peer-deps && \
-npm rebuild && \
-npm run build
-"""
+command = "cd client && npm install && npm run build"
 
 [build.environment]
-NODE_VERSION = "18.17.0"
+NODE_VERSION = "16.20.0"
 
 # Build output directory
 [site]
