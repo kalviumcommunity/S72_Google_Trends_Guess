@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 import ComingSoon from './pages/ComingSoon';
+import Play from './pages/Play';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/play" element={<ComingSoon />} />
+            <Route path="/play" element={<Play />} />
             <Route path="/leaderboard" element={<ComingSoon />} />
             <Route path="/about" element={<ComingSoon />} />
             <Route path="*" element={<NotFound />} />
