@@ -1,0 +1,25 @@
+meta {
+  name: Update Word Pair
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:5000/api/words/:id
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "word1": "updated_word1",
+    "word2": "updated_word2",
+    "searchVolume1": 90,
+    "searchVolume2": 95
+  }
+}
+
+docs {
+  title: "Update Word Pair"
+  description: "Updates an existing word pair by ID"
+} 

@@ -1,0 +1,25 @@
+meta {
+  name: Create Word Pair
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:5000/api/words
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "word1": "javascript",
+    "word2": "python",
+    "searchVolume1": 85,
+    "searchVolume2": 100
+  }
+}
+
+docs {
+  title: "Create New Word Pair"
+  description: "Creates a new word pair with their respective search volumes"
+} 

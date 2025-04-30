@@ -1,0 +1,15 @@
+meta {
+  name: Get Random Word
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:5000/api/words/random
+  body: none
+}
+
+docs {
+  title: "Get Random Word Pair"
+  description: "Retrieves a random word pair for the game"
+} 
