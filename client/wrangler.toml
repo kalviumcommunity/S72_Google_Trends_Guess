@@ -1,0 +1,27 @@
+# Frontend configuration for Cloudflare Pages
+name = "trends-guess-frontend"
+compatibility_date = "2024-03-01"
+
+[build]
+command = "npm install && npm run build"
+output_dir = "dist"
+
+[site]
+bucket = "./dist"
+
+[build.environment]
+NODE_VERSION = "20"
+
+# Production environment variables
+[env.production]
+vars = { 
+  VITE_API_URL = "https://api.trends-guess.com"  # Update with your production API URL
+  VITE_ENVIRONMENT = "production"
+}
+
+# Development environment variables
+[env.development]
+vars = { 
+  VITE_API_URL = "https://dev-api.trends-guess.com"  # Update with your development API URL
+  VITE_ENVIRONMENT = "development"
+} 
