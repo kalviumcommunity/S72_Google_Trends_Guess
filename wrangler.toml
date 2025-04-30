@@ -1,30 +1,25 @@
-# Root configuration for monorepo
+# Cloudflare Pages Configuration
 name = "trends-guess"
-compatibility_date = "2024-03-01"
 
+# Build Configuration
 [build]
-command = "cd client && npm install && npm run build"
-output_dir = "client/dist"
-
-[site]
-bucket = "./client/dist"
+command = "npm install && npm run build"
 
 [build.environment]
 NODE_VERSION = "20"
 
-# Production environment variables
-[env.production]
-vars = { 
-  VITE_API_URL = "https://api.trends-guess.com"
-  VITE_ENVIRONMENT = "production"
-}
+# Build output directory
+[site]
+bucket = "client/dist"
 
-# Development environment variables
+# Environment variables
+[env.production]
+VITE_API_URL = "https://api.trends-guess.com"
+VITE_ENVIRONMENT = "production"
+
 [env.development]
-vars = { 
-  VITE_API_URL = "https://dev-api.trends-guess.com"
-  VITE_ENVIRONMENT = "development"
-}
+VITE_API_URL = "https://dev-api.trends-guess.com"
+VITE_ENVIRONMENT = "development"
 
 # Routes configuration
 [[routes]]

@@ -7,7 +7,7 @@
     "server"
   ],
   "scripts": {
-    "build": "cd client && npm run build",
+    "build": "cd client && npm install && npm run build",
     "dev": "cd client && npm run dev",
     "deploy": "wrangler pages deploy client/dist",
     "deploy:api": "cd server && wrangler deploy"
