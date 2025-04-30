@@ -5,14 +5,16 @@ name = "trends-guess"
 [build]
 command = """
 cd client && \
+export ROLLUP_SKIP_NODE_RESOLUTION=true && \
 rm -rf node_modules package-lock.json && \
-npm install && \
-npm install @rollup/rollup-linux-x64-gnu@4.6.1 && \
+npm cache clean --force && \
+npm install --legacy-peer-deps && \
+npm rebuild && \
 npm run build
 """
 
 [build.environment]
-NODE_VERSION = "20"
+NODE_VERSION = "18.17.0"
 
 # Build output directory
 [site]
