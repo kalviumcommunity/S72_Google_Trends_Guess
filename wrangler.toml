@@ -1,0 +1,32 @@
+# Root configuration for monorepo
+name = "trends-guess"
+compatibility_date = "2024-03-01"
+
+[build]
+command = "cd client && npm install && npm run build"
+output_dir = "client/dist"
+
+[site]
+bucket = "./client/dist"
+
+[build.environment]
+NODE_VERSION = "20"
+
+# Production environment variables
+[env.production]
+vars = { 
+  VITE_API_URL = "https://api.trends-guess.com"
+  VITE_ENVIRONMENT = "production"
+}
+
+# Development environment variables
+[env.development]
+vars = { 
+  VITE_API_URL = "https://dev-api.trends-guess.com"
+  VITE_ENVIRONMENT = "development"
+}
+
+# Routes configuration
+[[routes]]
+pattern = "/*"
+handler = "index.html" 
