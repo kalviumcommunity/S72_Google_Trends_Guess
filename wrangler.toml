@@ -3,10 +3,16 @@ name = "trends-guess"
 
 # Build Configuration
 [build]
-command = "npm install && npm run build"
+command = """
+cd client && \
+rm -rf node_modules package-lock.json && \
+npm install --no-optional && \
+npm run build
+"""
 
 [build.environment]
 NODE_VERSION = "20"
+NPM_FLAGS = "--no-optional"
 
 # Build output directory
 [site]
