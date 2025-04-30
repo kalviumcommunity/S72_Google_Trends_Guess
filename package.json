@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "clean": "cd client && rm -rf node_modules package-lock.json",
-    "build": "cd client && npm install --no-optional && npm run build",
+    "build": "cd client && npm install && npm install @rollup/rollup-linux-x64-gnu@4.6.1 && npm run build",
     "dev": "cd client && npm run dev",
     "deploy": "wrangler pages deploy client/dist",
     "deploy:api": "cd server && wrangler deploy"
