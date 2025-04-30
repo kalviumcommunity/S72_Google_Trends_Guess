@@ -1,0 +1,19 @@
+name = "trends-guess"
+compatibility_date = "2024-03-01"
+
+[site]
+bucket = "./client/dist"
+
+[build]
+command = "cd client && npm install && npm run build"
+output_dir = "dist"
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[[routes]]
+pattern = "/*"
+handler = "index.html" 
